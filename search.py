@@ -99,13 +99,20 @@ def graph_search(problem, fringe):
     If two paths reach a state, only use the best one. [Fig. 3.18]"""
     closed = {}
     fringe.append(Node(problem.initial))
+    generated_nodes = 1
+    visited_nodes = 0
     while fringe:
         node = fringe.pop()
+        visited_nodes += 1
         if problem.goal_test(node.state):
-            return node
+            cost = 0
+            for i in range(len(node.path()) -1, 0, -1):
+                cost = problem.path_cost(cost, node.path()[i].state, None, node.path()[i -1].state)
+            return node, visited_nodes, generated_nodes, cost
         if node.state not in closed:
             closed[node.state] = True
             fringe.extend(node.expand(problem))
+            generated_nodes += len(node.expand(problem))
     return None
 
 

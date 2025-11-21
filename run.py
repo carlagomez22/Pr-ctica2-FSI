@@ -2,11 +2,21 @@
 
 import search
 
-ab = search.GPSProblem('A', 'B'
-                       , search.romania)
+initials = [("A", "B"), ("O", "E"), ("G", "Z"), ("N", "D"), ("M", "F")]
 
-print(search.breadth_first_graph_search(ab).path())
-print(search.depth_first_graph_search(ab).path())
+
+for first, second in initials:
+    print("--------------------------------------------")
+    print(f"Problema de {first} to {second}")
+    ab = search.GPSProblem(first, second
+                           , search.romania)
+    path, visited, generated, cost = search.breadth_first_graph_search(ab)
+    print(f"ANCHURA: Camino: {path.path()}. Nodos visitados (lista cerrada): {visited}. Generados: {cost}")
+
+    path1, visited1, generated1, cost1 = search.depth_first_graph_search(ab)
+    print(f"PROFUNDIDAD: Camino: {path1.path()}. Nodos visitados (lista cerrada): {visited1}. Generados: {cost1}")
+    print("--------------------------------------------")
+
 
 # Result:
 # [<Node B>, <Node P>, <Node R>, <Node S>, <Node A>] : 101 + 97 + 80 + 140 = 418
