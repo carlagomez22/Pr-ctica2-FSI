@@ -105,25 +105,32 @@ def graph_search(problem, fringe):
         node = fringe.pop()
         visited_nodes += 1
         if problem.goal_test(node.state):
-            cost = 0
-            for i in range(len(node.path()) -1, 0, -1):
-                cost = problem.path_cost(cost, node.path()[i].state, None, node.path()[i -1].state)
-            return node, visited_nodes, generated_nodes, cost
+            return list(reversed(node.path())), visited_nodes, generated_nodes, calculate_accumulate_path(node, problem)
         if node.state not in closed:
             closed[node.state] = True
             fringe.extend(node.expand(problem))
             generated_nodes += len(node.expand(problem))
     return None
 
-
 def breadth_first_graph_search(problem):
     """Search the shallowest nodes in the search tree first. [p 74]"""
     return graph_search(problem, FIFOQueue())  # FIFOQueue -> fringe
 
-
 def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     return graph_search(problem, Stack())
+
+def branch_and_bround(problem):
+    return graph_search(problem, OrderedList())
+
+def branch_and_bround_with_subestimnation(problem):
+    return graph_search(problem, OrderedListWithH(problem))
+
+def calculate_accumulate_path(final_node, problem):
+    cost = 0
+    for i in range(len(final_node.path()) - 1, 0, -1):
+        cost = problem.path_cost(cost, final_node.path()[i].state, None, final_node.path()[i - 1].state)
+    return cost
 
 
 

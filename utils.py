@@ -1,6 +1,7 @@
-
 #______________________________________________________________________________
 # Simple Data Structures: infinity, Dict, Struct
+import math
+
 
 infinity = 1.0e400
 
@@ -544,6 +545,57 @@ class FIFOQueue(Queue):
         return e
 
 
+class OrderedList():
+
+    def __init__(self):
+        self.A = []
+        self.start = 0
+
+    def append(self, node):
+        self.A.append(node)
+        self.A.sort(key= lambda x: x.path_cost)
+
+    def __len__(self):
+        return len(self.A) - self.start
+
+    def extend(self, items):
+        self.A.extend(items)
+        self.A.sort(key=lambda x: x.path_cost)
+
+    def pop(self):
+        e = self.A[self.start]
+        self.start += 1
+        if self.start > 5 and self.start > len(self.A) / 2:
+            self.A = self.A[self.start:]
+            self.start = 0
+        return e
+
+
+class OrderedListWithH():
+
+    def __init__(self, problem):
+        self.A = []
+        self.start = 0
+        self.problem = problem
+
+    def append(self, node):
+        self.A.append(node)
+        self.A.sort(key=lambda x: x.path_cost + self.problem.h(x))
+
+    def __len__(self):
+        return len(self.A) - self.start
+
+    def extend(self, items):
+        self.A.extend(items)
+        self.A.sort(key=lambda x: x.path_cost + self.problem.h(x))
+
+    def pop(self):
+        e = self.A[self.start]
+        self.start += 1
+        if self.start > 5 and self.start > len(self.A) / 2:
+            self.A = self.A[self.start:]
+            self.start = 0
+        return e
 
 ## Fig: The idea is we can define things like Fig[3,10] later.
 ## Alas, it is Fig[3,10] not Fig[3.10], because that would be the same as Fig[3.1]
