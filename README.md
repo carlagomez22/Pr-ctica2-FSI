@@ -140,8 +140,8 @@ def graph_search(problem, fringe):
             closed[node.state] = True
             fringe.extend(node.expand(problem))
             generated_nodes += len(node.expand(problem))
-    
-    
+    return None
+```
       
 
 Traza del Branch and Bound de A a B:
