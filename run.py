@@ -24,12 +24,12 @@ for first, second in initials:
     start_time = time()
     path2, visited2, generated2, cost2 = search.branch_and_bround(ab)
     end_time = time()
-    print(f"Brand & Bound: Camino: {path2}. Nodos visitados (lista cerrada): {visited2}. Generados: {generated2}. Coste {cost2}. Tiempo = {end_time-start_time}")
+    print(f"Branch & Bound: Camino: {path2}. Nodos visitados (lista cerrada): {visited2}. Generados: {generated2}. Coste {cost2}. Tiempo = {end_time-start_time}")
 
     start_time = time()
     path2, visited2, generated2, cost2 = search.branch_and_bround_with_subestimnation(ab)
     end_time = time()
-    print(f"Brand & Bound with H: Camino: {path2}. Nodos visitados (lista cerrada): {visited2}. Generados: {generated2}. Coste {cost2}. Tiempo = {end_time-start_time}")
+    print(f"Branch & Bound with H: Camino: {path2}. Nodos visitados (lista cerrada): {visited2}. Generados: {generated2}. Coste {cost2}. Tiempo = {end_time-start_time}")
     print("--------------------------------------------")
 
 

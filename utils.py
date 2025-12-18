@@ -558,7 +558,8 @@ class OrderedList():
     def __len__(self):
         return len(self.A) - self.start
 
-    def extend(self, items):
+    def extend(self, items):  # en caso de querer evitar repetidos, se necesitaría que se nos proporcione el problema y el nodo
+        #items = [item for item in node.expand(problem) if item not in node.path()]
         self.A.extend(items)
         self.A.sort(key=lambda x: x.path_cost)
 
@@ -585,7 +586,8 @@ class OrderedListWithH():
     def __len__(self):
         return len(self.A) - self.start
 
-    def extend(self, items):
+    def extend(self, items): # en caso de querer evitar repetidos, se necesitaría que se nos proporcione el problema y el nodo
+        # items = [item for item in node.expand(problem) if item not in node.path()]
         self.A.extend(items)
         self.A.sort(key=lambda x: x.path_cost + self.problem.h(x))
 
