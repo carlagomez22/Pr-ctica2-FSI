@@ -140,6 +140,13 @@ def graph_search(problem, fringe):
             closed[node.state] = True
             fringe.extend(node.expand(problem))
             generated_nodes += len(node.expand(problem))
-    return None
+    
+    
+      
 
-```
+Traza del Branch and Bound de A a B:
+
+![AISelect_20251218_162113_Samsung Notes](https://github.com/user-attachments/assets/528675a7-0041-4b9d-bb14-4bd6153b7a2e)
+
+
+
